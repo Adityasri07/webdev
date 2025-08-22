@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Folder</title>
+</head>
+<body>
+    <h1>Welcome to the HTML folder</h1>
+    <p>This folder contains HTML files for the webdev project.</p>
+</body>
+</html>
