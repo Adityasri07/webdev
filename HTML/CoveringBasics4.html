@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covering Advanced HTML Topics</title>
+</head>
+<body>
+    <header>
+        <h1>Advanced HTML Topics</h1>
+    </header>
+
+    <!-- Semantic HTML5 Elements -->
+    <main>
+        <section>
+            <h2>Semantic Elements</h2>
+            <article>
+                <header>
+                    <h3>Usage of &lt;section&gt;, &lt;article&gt;, &lt;aside&gt;, &lt;figure&gt;</h3>
+                </header>
+                <figure>
+                    <img src="example.jpg" alt="Example image">
+                    <figcaption>This demonstrates a figure with a caption.</figcaption>
+                </figure>
+                <aside>
+                    <p>Semantic tags improve accessibility and SEO.</p>
+                </aside>
+            </article>
+        </section>
+        
+        <!-- Custom Data Attributes -->
+        <section>
+            <h2>Custom Data Attributes</h2>
+            <button data-level="advanced" data-topic="html-attributes">
+                Advanced Button
+            </button>
+        </section>
+
+        <!-- Responsive Images -->
+        <section>
+            <h2>Responsive Images</h2>
+            <picture>
+                <source media="(max-width:600px)" srcset="img-small.jpg">
+                <source media="(max-width:1200px)" srcset="img-medium.jpg">
+                <img src="img-large.jpg" alt="Responsive example">
+            </picture>
+        </section>
+
+        <!-- Template and Slot -->
+        <section>
+            <h2>&lt;template&gt; and &lt;slot&gt;</h2>
+            <template id="my-template">
+                <div><slot></slot> Content inside template</div>
+            </template>
+        </section>
+
+        <!-- Canvas -->
+        <section>
+            <h2>Canvas</h2>
+            <canvas id="myCanvas" width="200" height="100"></canvas>
+            <script>
+                const canvas = document.getElementById('myCanvas');
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = "#FF0000";
+                ctx.fillRect(20, 20, 150, 50);
+            </script>
+        </section>
+
+        <!-- SVG -->
+        <section>
+            <h2>SVG</h2>
+            <svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" fill="blue"/>
+            </svg>
+        </section>
+
+        <!-- Audio/Video -->
+        <section>
+            <h2>Audio & Video</h2>
+            <video controls width="320">
+                <source src="sample.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        
+        <!-- ARIA and Accessibility -->
+        <section>
+            <h2>ARIA & Accessibility</h2>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- HTML5 Forms -->
+        <section>
+            <h2>HTML5 Forms & Validation</h2>
+            <form>
+                <input type="email" required placeholder="Enter your email">
+                <input type="url" pattern="https://.*" placeholder="https://example.com" required>
+                <input list="browsers" name="browser">
+                <datalist id="browsers">
+                    <option value="Chrome">
+                    <option value="Firefox">
+                </datalist>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Drag and Drop -->
+        <section>
+            <h2>Drag and Drop API</h2>
+            <div draggable="true" id="drag1">Drag me!</div>
+        </section>
+
+        <!-- Iframe Security and Sandboxing -->
+        <section>
+            <h2>Iframes & Security</h2>
+            <iframe src="https://example.com" sandbox></iframe>
+        </section>
+
+        <!-- Dialog -->
+        <section>
+            <h2>Dialog Element</h2>
+            <dialog id="myDialog">
+                <p>This is a modal dialog!</p>
+                <button onclick="document.getElementById('myDialog').close()">Close</button>
+            </dialog>
+            <button onclick="document.getElementById('myDialog').showModal()">Show Dialog</button>
+        </section>
+
+        <!-- Progressive Web App Basics -->
+        <section>
+            <h2>PWA Basics</h2>
+            <link rel="manifest" href="manifest.json">
+            <meta name="theme-color" content="#2196F3">
+        </section>
+
+        <!-- Details and Summary -->
+        <section>
+            <h2>&lt;details&gt; and &lt;summary&gt;</h2>
+            <details>
+                <summary>More Info</summary>
+                Advanced HTML uses features like this to hide/show text.
+            </details>
+        </section>
+
+        <!-- Microdata -->
+        <section>
+            <h2>Microdata for SEO</h2>
+            <div itemscope itemtype="https://schema.org/Person">
+                <span itemprop="name">John Doe</span>
+            </div>
+        </section>
+
+        <!-- Lazy Loading -->
+        <section>
+            <h2>Lazy Loading Images & Iframes</h2>
+            <img src="pic.jpg" loading="lazy" alt="Lazy loaded image">
+        </section>
+
+        <!-- Meta Tags for Browser Control -->
+        <section>
+            <h2>Meta Tags for Browser Control</h2>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        </section>
+
+        <!-- Advanced Table Markup -->
+        <section>
+            <h2>Advanced Table Markup</h2>
+            <table>
+                <caption>Table Example</caption>
+                <colgroup>
+                    <col span="1" style="background-color: #e9e9e9">
+                </colgroup>
+                <thead>
+                    <tr><th>Head</th></tr>
+                </thead>
+                <tfoot>
+                    <tr><td>Footer</td></tr>
+                </tfoot>
+                <tbody>
+                    <tr><td>Body Content</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Web Storage API Basic Usage -->
+        <section>
+            <h2>Web Storage (localStorage/sessionStorage)</h2>
+            <script>
+                localStorage.setItem('user', 'Jane');
+                document.write("User from localStorage: " + localStorage.getItem('user'));
+            </script>
+        </section>
+    </main>
+</body>
+</html>
