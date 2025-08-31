@@ -1,0 +1,255 @@
+/* =======================
+   0) LAYERS & RESET
+   ======================= */
+@layer reset, theme, base, components, utilities;
+
+/* --- reset --- */
+@layer reset {
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { height: 100%; }
+  body,h1,h2,h3,h4,p,figure { margin: 0; }
+  img { display:block; max-inline-size:100%; block-size:auto; }
+  button,input,select,textarea { font: inherit; }
+}
+
+/* =======================
+   1) THEME (OKLCH + DARK)
+   ======================= */
+@layer theme {
+  :root {
+    /* Base palette in OKLCH for perceptual consistency */
+    --bg: oklch(98% 0 0);
+    --fg: oklch(22% 0.04 250);
+    --muted: oklch(60% 0.03 250);
+    --surface: oklch(96% 0.01 250);
+    --brand: oklch(65% 0.15 260);
+    --brand-hi: oklch(72% 0.16 260);
+
+    /* Fluid scales */
+    --step-0: clamp(0.925rem, 0.86rem + 0.3cqi, 1rem);
+    --step-1: clamp(1.1rem, 1rem + 0.5cqi, 1.35rem);
+    --step-2: clamp(1.35rem, 1.15rem + 0.9cqi, 1.8rem);
+    --radius: 12px;
+    --gap: clamp(0.75rem, 1cqi, 1.25rem);
+
+    /* Animatable accent using @property (number) */
+    --glow: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: oklch(14% 0.02 250);
+      --fg: oklch(94% 0.01 250);
+      --muted: oklch(70% 0.02 250);
+      --surface: oklch(18% 0.02 250);
+      --brand: oklch(70% 0.16 260);
+      --brand-hi: oklch(78% 0.18 260);
+    }
+  }
+
+  /* Let the UA draw proper form controls in both schemes */
+  :root { color-scheme: light dark; }
+}
+
+/* =======================
+   2) BASE
+   ======================= */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+  }
+
+  .shell {
+    inline-size: min(1100px, 100% - 6vw);
+    margin-inline: auto;
+    padding-block: 2rem;
+  }
+
+  .site-header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    gap: var(--gap);
+    margin-block-end: 1.5rem;
+  }
+
+  h1 { font-size: var(--step-2); letter-spacing: .2px; }
+  p  { font-size: var(--step-0); color: var(--muted); }
+}
+
+/* =======================
+   3) COMPONENTS
+   ======================= */
+
+/* 3a) Cards: container queries + container units */
+@layer components {
+  /* Establish a container for queries; style queries use the container’s inline-size */
+  .cards {
+    --cols: 1;
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: calc(var(--gap) * 1.2);
+  }
+
+  /* Grow columns at specific container widths (not viewport!) */
+  @container (inline-size >= 42rem) {
+    .cards { --cols: 2; }
+  }
+  @container (inline-size >= 72rem) {
+    .cards { --cols: 3; }
+  }
+
+  /* Card layout */
+  .card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: clip;
+    border: 1px solid color-mix(in oklch, var(--surface), var(--fg) 12%);
+    box-shadow: 0 1px 2px color-mix(in oklch, black, transparent 90%);
+    content-visibility: auto; /* boost large lists */
+    contain: content;
+    transition: translate .35s ease, box-shadow .35s ease;
+  }
+
+  /* Fancy hover, but respect reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover {
+      translate: 0 -2px;
+      box-shadow: 0 12px 28px color-mix(in oklch, black, transparent 80%);
+    }
+  }
+
+  /* Media with gradient mask for readability */
+  .card__media {
+    aspect-ratio: 3 / 2;
+    inline-size: 100%;
+    object-fit: cover;
+    background: color-mix(in oklch, var(--brand) 40%, transparent);
+    mask-image: linear-gradient(to bottom, black 85%, transparent);
+  }
+
+  /* Use subgrid to line up inner content across cards */
+  .cards {
+    /* Define column tracks for children to inherit */
+    grid-auto-rows: minmax(0, 1fr);
+  }
+  .card__body {
+    display: grid;
+    grid-template-rows: subgrid; /* aligns rows across cards */
+    padding: clamp(0.9rem, 1cqi + .5rem, 1.25rem);
+    gap: .6rem;
+  }
+
+  .card__title {
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+
+  .card__meta {
+    margin-block-start: auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .75rem;
+  }
+
+  .badge {
+    justify-self: start;
+    font-size: .75rem;
+    padding: .25rem .5rem;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--fg) 12%, transparent);
+    color: var(--fg);
+  }
+
+  /* :has() — style the entire card if it contains a .badge--new */
+  .card:has(.badge--new) {
+    outline: 2px solid color-mix(in oklch, var(--brand) 60%, white 0%);
+    outline-offset: 2px;
+  }
+
+  .btn {
+    --btn-bg: var(--brand);
+    --btn-bg-hi: var(--brand-hi);
+    display: inline-grid;
+    place-items: center;
+    padding: .6rem .9rem;
+    border-radius: .7rem;
+    border: 0;
+    text-decoration: none;
+    color: oklch(15% 0 0);
+    background: linear-gradient(180deg, var(--btn-bg-hi), var(--btn-bg));
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* @property to animate a “glow” without creating layers in JS */
+  @property --glow {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  .btn::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(60% 120% at 50% 0%,
+                 color-mix(in oklch, var(--btn-bg-hi), white 10%) 0%,
+                 transparent 70%);
+    opacity: calc(var(--glow) * 0.25);
+    filter: blur(calc(6px + 6px * var(--glow)));
+    z-index: -1;
+    transition: opacity .3s ease, filter .3s ease;
+  }
+
+  .btn:where(:hover,:focus-visible) { --glow: 1; }
+
+  /* Accessibility niceties */
+  .btn:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--brand) 60%, white 0%);
+    outline-offset: 2px;
+  }
+
+  /* Alt button style using cascade layers priority */
+  .theme-toggle {
+    padding: .5rem .8rem;
+    border-radius: .6rem;
+    border: 1px solid color-mix(in oklch, var(--fg) 20%, transparent);
+    background: color-mix(in oklch, var(--surface), black 4%);
+    color: var(--fg);
+    cursor: pointer;
+    accent-color: var(--brand); /* for checkboxes/radios in theme UIs */
+  }
+}
+
+/* =======================
+   4) UTILITIES
+   ======================= */
+@layer utilities {
+  .flow > * + * { margin-block-start: var(--gap); }
+  .sr-only {
+    position:absolute; inline-size:1px; block-size:1px;
+    clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; overflow:hidden; border:0; padding:0; margin:-1px;
+  }
+}
+
+/* =======================
+   5) BONUS SELECTOR GOODIES
+   ======================= */
+@layer utilities {
+  /* Scope styles to a region with :where() to avoid specificity wars */
+  :where([data-ui="cards"]) .card__title { letter-spacing: .2px; }
+
+  /* Style when the card contains a long paragraph (approx) */
+  .card:has(p:has(> :nth-child(n))) .card__text { color: color-mix(in oklch, var(--muted), var(--fg) 10%); }
+}
