@@ -1,0 +1,100 @@
+/* === 1. Glassmorphism Hero === */
+.hero {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1f26, #2b2e3c);
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://picsum.photos/1920/1080?blur") center/cover no-repeat;
+  filter: blur(30px) brightness(0.6);
+  z-index: -1;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 800;
+  background: linear-gradient(120deg, #8a2be2, #ff69b4);
+  -webkit-background-clip: text;
+  color: transparent;
+  transform: rotateY(15deg) rotateX(5deg);
+  text-align: center;
+}
+
+.hero-sub {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  backdrop-filter: blur(20px) saturate(1.8);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  color: #e5e5e5;
+}
+
+/* === 2. 3D Cards with Parallax === */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  padding: 3rem;
+  perspective: 1000px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  font-size: 1.25rem;
+  text-align: center;
+  backdrop-filter: blur(15px) saturate(1.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: rotateY(15deg) rotateX(8deg) scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* === 3. Scroll-Driven Animation === */
+@scroll-timeline scroll-fade {
+  source: auto;
+  orientation: block;
+  scroll-offsets: (start 0px, end 90%);
+}
+
+.cards {
+  animation: fade-in linear both;
+  animation-timeline: scroll-fade;
+  animation-range: 0% 80%;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === 4. Custom Cursor with Glow === */
+.cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  z-index: 9999;
+}
+
+body {
+  cursor: none; /* hide default cursor */
+}
