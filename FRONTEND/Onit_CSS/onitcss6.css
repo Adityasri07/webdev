@@ -1,0 +1,93 @@
+/* ==========================
+   1) AURORA BACKGROUND
+   ========================== */
+.aurora {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(600px circle at 20% 20%, rgba(255,0,128,0.4), transparent 40%),
+    radial-gradient(500px circle at 80% 30%, rgba(0,200,255,0.4), transparent 40%),
+    radial-gradient(400px circle at 50% 80%, rgba(0,255,128,0.4), transparent 40%),
+    #0a0a0a;
+  animation: aurora 15s infinite alternate;
+}
+@keyframes aurora {
+  50% { background-position: 30% 40%, 70% 20%, 40% 70%; }
+}
+
+/* Shine text effect */
+.shine {
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ff00cc);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+@keyframes shine {
+  to { background-position: 300%; }
+}
+
+/* ==========================
+   2) CAROUSEL WITH SCROLL-SNAP
+   ========================== */
+.carousel {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  display: flex;
+}
+.slides {
+  display: flex;
+  width: 400%;
+}
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  height: 60vh;
+  background: linear-gradient(135deg, #222, #555);
+  color: white;
+}
+
+/* ==========================
+   3) GOOEY BLOBS (SVG FILTER)
+   ========================== */
+.gooey {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  filter: url(#goo);
+  margin: 5rem 0;
+}
+.blob {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #ff0080, #7928ca);
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite;
+}
+.blob:nth-child(2) {
+  animation-delay: 1s;
+  background: linear-gradient(135deg, #00f, #0ff);
+}
+.blob:nth-child(3) {
+  animation-delay: 2s;
+  background: linear-gradient(135deg, #0f0, #ff0);
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+}
+
+/* Add SVG filter */
+svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
