@@ -1,0 +1,115 @@
+body {
+  background: #111;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* 1. Typewriter */
+.typewriter {
+  font-size: 2rem;
+  font-family: monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #0ff;
+  width: 0;
+  margin-bottom: 2rem;
+  animation: typing 4s steps(20) forwards, blink 0.7s step-end infinite;
+}
+@keyframes typing { to { width: 22ch; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* 2. Neon Button */
+.neon-btn {
+  padding: 1rem 2rem;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: #111;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 0 5px #0ff, 0 0 20px #0ff;
+  transition: box-shadow 0.3s;
+}
+.neon-btn:hover {
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff;
+}
+
+/* 3. Card Hover Zoom */
+.card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.card:hover img {
+  transform: scale(1.2);
+}
+
+/* 4. Loader Dots */
+.loader-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 2rem;
+}
+.loader-dots div {
+  width: 15px;
+  height: 15px;
+  background: #0ff;
+  border-radius: 50%;
+  animation: pulse 0.8s infinite alternate;
+}
+.loader-dots div:nth-child(2) { animation-delay: 0.2s; }
+.loader-dots div:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse {
+  from { transform: scale(0.5); opacity: 0.5; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+/* 5. Floating Effect */
+.floaty {
+  display: inline-block;
+  margin: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* 6. Shiny Gradient Text */
+.shine {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ff00cc);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+@keyframes shine { to { background-position: 300%; } }
+
+/* 7. Conic Gradient Loader */
+.loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#ff00cc, #3333ff, #00ffcc, #ff00cc);
+  mask: radial-gradient(circle 40px, transparent 99%, black 100%);
+  -webkit-mask: radial-gradient(circle 40px, transparent 99%, black 100%);
+  animation: spin 1.5s linear infinite;
+  margin: 5rem auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
