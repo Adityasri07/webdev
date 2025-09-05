@@ -1,0 +1,129 @@
+/* ==========================
+   1) CYBERPUNK GRID
+   ========================== */
+.cyber-grid {
+  height: 50vh;
+  background: linear-gradient(#0f0f0f, #000);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.cyber-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#0ff 1px, transparent 1px),
+              linear-gradient(90deg, #0ff 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 8s linear infinite;
+  opacity: 0.2;
+}
+@keyframes grid-move {
+  to { background-position: 50px 50px; }
+}
+.neon {
+  font-size: 4rem;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+}
+
+/* ==========================
+   2) MARQUEE
+   ========================== */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #111;
+  color: #fff;
+  font-size: 2rem;
+  padding: 1rem;
+}
+.marquee p {
+  display: inline-block;
+  animation: scroll-left 15s linear infinite;
+}
+@keyframes scroll-left {
+  to { transform: translateX(-100%); }
+}
+
+/* ==========================
+   3) LIQUID TEXT
+   ========================== */
+.liquid {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: liquid 6s ease-in-out infinite alternate;
+  clip-path: path("M0,100 Q25,80 50,100 T100,100 V0 H0 Z");
+}
+@keyframes liquid {
+  0%   { clip-path: path("M0,100 Q25,80 50,100 T100,100 V0 H0 Z"); }
+  50%  { clip-path: path("M0,100 Q25,120 50,90 T100,100 V0 H0 Z"); }
+  100% { clip-path: path("M0,100 Q25,70 50,110 T100,100 V0 H0 Z"); }
+}
+
+/* ==========================
+   4) 3D FLIP CARD
+   ========================== */
+.card-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0;
+}
+.card {
+  width: 200px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card div {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  backface-visibility: hidden;
+  border-radius: 12px;
+}
+.front {
+  background: linear-gradient(135deg, #ff0080, #7928ca);
+  color: white;
+}
+.back {
+  background: linear-gradient(135deg, #0ff, #00f);
+  color: black;
+  transform: rotateY(180deg);
+}
+
+/* ==========================
+   5) CONIC GRADIENT LOADER
+   ========================== */
+.loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#ff00cc, #3333ff, #00ffcc, #ff00cc);
+  mask: radial-gradient(circle 40px, transparent 99%, black 100%);
+  -webkit-mask: radial-gradient(circle 40px, transparent 99%, black 100%);
+  animation: spin 1.5s linear infinite;
+  margin: 5rem auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
