@@ -1,0 +1,132 @@
+body {
+  background: #0a0a0a;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  padding: 3rem;
+}
+
+/* 1. Glitch Text */
+.glitch {
+  font-size: 4rem;
+  font-weight: bold;
+  position: relative;
+  color: white;
+}
+.glitch::before,
+.glitch::after {
+  content: "GLITCH EFFECT";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.glitch::before {
+  color: #f0f;
+  animation: glitch 1s infinite;
+}
+.glitch::after {
+  color: #0ff;
+  animation: glitch 1s infinite reverse;
+}
+@keyframes glitch {
+  0% { clip-path: inset(0 0 80% 0); transform: translate(-3px, -2px); }
+  20% { clip-path: inset(20% 0 60% 0); transform: translate(3px, 2px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 1px); }
+  60% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -1px); }
+  80% { clip-path: inset(80% 0 0 0); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(0 0 80% 0); transform: translate(0); }
+}
+
+/* 2. Glassmorphism Card */
+.glass-card {
+  width: 300px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* 3. Wavy Text */
+.wave {
+  font-size: 2.5rem;
+  display: inline-block;
+  position: relative;
+}
+.wave::after {
+  content: attr(class);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #0ff;
+  animation: waveAnim 2s infinite ease-in-out;
+}
+@keyframes waveAnim {
+  0%,100% { clip-path: polygon(0 45%, 100% 55%, 100% 100%, 0% 100%); }
+  50% { clip-path: polygon(0 60%, 100% 40%, 100% 100%, 0% 100%); }
+}
+
+/* 4. Skeleton Loader */
+.skeleton-loader {
+  width: 300px;
+  height: 150px;
+  border-radius: 12px;
+  margin: 3rem auto;
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+/* 5. Ripple Button */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border: none;
+  background: #0ff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ripple-btn::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+.ripple-btn:active::after {
+  transform: scale(3);
+  opacity: 1;
+  transition: transform 0.6s, opacity 0.8s;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+}
+
+/* 6. Fire Text Effect */
+.fire-text {
+  font-size: 3rem;
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(180deg, #ff0, #f80, #f00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fire 1s infinite alternate;
+  text-shadow: 0 0 10px #ff0, 0 0 20px #f80, 0 0 40px #f00;
+}
+@keyframes fire {
+  0% { filter: hue-rotate(0deg) blur(1px); }
+  100% { filter: hue-rotate(45deg) blur(2px); }
+}
